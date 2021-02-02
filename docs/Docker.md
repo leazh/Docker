@@ -44,7 +44,7 @@ cgroups 将应用程序限制为一组特定的资源。Control Groups 允许 Do
 
 ## What is a container? (什么是容器)
 
-容器就像是运行在机器上的所有其他进程隔离的另一个进程。这种隔离就是利用了内核的namespace （命名空间） 和 Control Groups (控制组)。
+容器就像是运行在机器上的所有其他进程隔离的另一个进程。这种隔离就是利用了内核的 namespace （命名空间） 和 Control Groups (控制组)。
 
 ## What is a container image？( 什么是容器镜像)
 
@@ -52,7 +52,7 @@ cgroups 将应用程序限制为一组特定的资源。Control Groups 允许 Do
 
 ## 安装 Docker
 
-详细见官网，这里只阐述做国内的docker-ce yum 源
+详细见官网，这里只阐述做国内的 docker-ce yum 源
 
 ```bash
  yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
