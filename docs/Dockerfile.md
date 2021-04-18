@@ -193,3 +193,4 @@ ENTRYPOINT exec top -b
 
 ## 参考资料
 - [dockerfile最佳实践](https://docs.docker.com/engine/reference/builder/)
+- 参考 [docker-library](https://github.com/docker-library) 的 dockerfile 的写法技巧
