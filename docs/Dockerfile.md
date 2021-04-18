@@ -25,6 +25,7 @@ FROM [--platform] <image>[@<digest>] [AS <name>]
 - 执行命令行的命令，
 
 RUN 有 2 中表达形式：
+
     - RUN <command> 直接在命令行运行一样。
 
     ```shell
