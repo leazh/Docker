@@ -26,20 +26,20 @@ FROM [--platform] <image>[@<digest>] [AS <name>]
 
 RUN 有 2 中表达形式：
 
-    - RUN <command> 直接在命令行运行一样。
+- RUN <command> 直接在命令行运行一样。
 
-    ```shell
-    # 如果执行长语句或者复杂语句，可以使用 \ (反斜杠) 分割，使其更具可读性，可理解性和可维护性
-    RUN "/bin/bash -c 'source $HOME/.bashrc; \
-    echo $HOME'"
-    ```
+```shell
+# 如果执行长语句或者复杂语句，可以使用 \ (反斜杠) 分割，使其更具可读性，可理解性和可维护性
+RUN "/bin/bash -c 'source $HOME/.bashrc; \
+echo $HOME'"
+```
 
-    - RUN ["executable <可执行文件>", "param1", "param2"]
+- RUN ["executable <可执行文件>", "param1", "param2"]
 
-   ```shell
-   # Exec 表单被解析为 JSON 数组，这意味着必须在单引号(‘)前后使用双引号(“)。
-   RUN ["/bin/bash", "-c", "echo hello"]
-   ```
+```shell
+# Exec 表单被解析为 JSON 数组，这意味着必须在单引号(‘)前后使用双引号(“)。
+RUN ["/bin/bash", "-c", "echo hello"]
+```
 
 ## WORKDIR
 
