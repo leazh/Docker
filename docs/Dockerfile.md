@@ -40,6 +40,68 @@ RUN 有 2 中表达形式：
    RUN ["/bin/bash", "-c", "echo hello"]
    ```
 
+## WORKDIR
+
+WORKDIR 类似于 `cd`，如果 WORKDIR 不存在，那么即使后面的 Dockerfile 任何指令中都没有使用它，也将创建它。如多次使用时，只提供了相对路径，那么它将相对于上一条WORKDIR指令的路径。
+
+使用 WORKDIR，而不要使用 `cd`，尽量使用 `绝对路径`，不要使用相对路径（易出错）。
+
+```shell
+WORKDIR /aa
+WORKDIR bb
+
+RUN pwd   
+# 那么实际的输出应该是 /aa/bb
+```
+
+## COPY
+
+2 种表达形式：
+
+COPY 指令从以下位置复制新文件或目录 <src> ，并将它们添加到容器的文件系统中 <dest>。
+<src>可以指定多个资源，但是文件和目录的路径将被解释为相对于构建上下文的源。
+每个都<src>可能包含通配符，并且匹配将使用 Go 的 [filepath.Match](http://golang.org/pkg/path/filepath#Match) 规则完成
+
+- COPY <src> <dest>
+
+```shell
+# 如果 mydir 是一个 相对路径，那么是相对于 WORKDOR ，到其中的源将在容器内进行复制。
+COPY hom* /mydir/
+```
+
+## ADD
+
+ADD是更高级的复制指令。只是在 COPY 的基础上新增了一些功能。添加远程文件/目录，建议使用 curl 或者 wget。
+
+例如：
+
+- 如果源文件是 URL，那么则会尝试下载该链接文件放到目标路径下，下载后的权限默认为 `600`，如果权限不满足，则需要自行设置；
+如果 URL 下载的是压缩包，那么是不会自动解压的，还是需要通过 RUN 命令来进行操作。
+- 如果源文件是压缩包，那么则会解压复制到目标路径下。
+
+```shell
+ADD test.tar.gz /opt
+```
+
+大部分情况下， COPY 要优于 ADD， ADD 除了有解压的功能外，
+
+## ENV 
+
+表达形式：
+
+```shell
+# 允许一次设置多个变量
+ENV <key>=<value> ...
+```
+
+该 `ENV` 指令将环境变量 <key> 设置为 value <value>，此值将在构建阶段中所有后续指令的环境中使用。并且在许多情况下也可以内联替换。
+该值将为其他环境变量解释，因此如果不对引号字符进行转义，则将其删除。像命令行解析一样，引号和反斜杠可用于在值中包含空格。
+
+```shell
+ENV MY_NAME="ascmcs Zh"
+ENV MY_cat=Rex\ The\ cat
+```
+
 ## CMD
 
 > CMD 指令就是用于指定默认的容器主进程的启动命令的。
@@ -113,7 +175,7 @@ ENTRYPOINT ["curl", "-s", "http://myip.ipip.net"]
 
 - ENTRYPOINT command param1 param2  `shell 表达方式`
 
-```shell\
+```shell
 ENTRYPOINT exec top -b
 ```
 
@@ -125,10 +187,8 @@ ENTRYPOINT exec top -b
 - CMD 应该用作 ENTRYPOINT 在容器中定义命令或执行临时命令的默认参数的方式。
 - CMD 当使用其他参数运行容器时，将被覆盖。
 
-
+ 
 
 
 ## 参考资料
-- [dockerfile最佳实践](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
-- [FROM 指令最佳参考](https://docs.docker.com/engine/reference/builder/#from)
-- [RUN 指令的最佳参考](https://docs.docker.com/engine/reference/builder/#run/)
+- [dockerfile最佳实践](https://docs.docker.com/engine/reference/builder/)
