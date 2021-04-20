@@ -1,6 +1,6 @@
 # Dockerfile 最佳实践 —— ENV、ARG
 
-## ENV 
+## ENV
 
 表达形式：
 
