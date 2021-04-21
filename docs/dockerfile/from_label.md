@@ -34,7 +34,7 @@ LABEL <key>=<value> <key>=<value> <key>=<value> ...
 ```shell
 LABEL org.opencontainers.image.create="2021-04-19"
 LABEL org.opencontainers.image.authors="ascmcs"
-LABEL org.opencontainers.image.version"1.0.0"
+LABEL org.opencontainers.image.version="1.0.0"
 ```
 
 更多 LABEL 格式请参考 [image-spec](https://github.com/opencontainers/image-spec/blob/master/annotations.md)。
